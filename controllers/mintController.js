@@ -4,7 +4,7 @@ const User = db.users;
 const dotenv = require('dotenv');
 dotenv.config();
 var Web3 = require("web3");
-web3 = new Web3(new Web3.providers.HttpProvider(process.env.TESTNET_WEB3_PROVIDER));
+web3 = new Web3(new Web3.providers.HttpProvider(process.env.WEB3_PROVIDER));
 const AvaWar = require("../abi/AvaWar.json");
 const contract = new web3.eth.Contract(AvaWar.abi, process.env.CONTRACT_ADDRESS);
 const sequelize = require('sequelize');

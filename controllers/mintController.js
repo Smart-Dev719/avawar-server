@@ -34,26 +34,30 @@ exports.checkMintable = async (req, res, next) => {
                     if (curColTokens.length < parseInt(process.env.PRESALE_MAX_MINT)) {
                         res.json({
                             success: true,
-                            count: parseInt(process.env.PRESALE_MAX_MINT) - curColTokens.length
+                            count: parseInt(process.env.PRESALE_MAX_MINT) - curColTokens.length,
+                            totalToken: totalToken,
                         })
                     } else {
                         // console.log(curColTokens.length);
                         res.json({
                             success: false,
                             minted: true,
-                            message: "Congrats, you already minted all of your allocated NFTs!"
+                            message: "Congrats, you already minted all of your allocated NFTs!",
+                            totalToken: totalToken,
                         });
                     }
                 } catch {
                     res.json({
                         success: false,
                         message: "Sorry, please try again later.",
+                        totalToken: totalToken,
                     })
                 }
             } else {
                 res.json({
                     success: false,
-                    message: "Sorry, we cannot find your record on our whitelist."
+                    message: "Sorry, we cannot find your record on our whitelist.",
+                    totalToken: totalToken,
                 });
             }
         } else {
@@ -64,18 +68,21 @@ exports.checkMintable = async (req, res, next) => {
                     res.json({
                         success: false,
                         minted: true,
-                        message: "Congrats, you already minted all of your allocated NFTs!"
+                        message: "Congrats, you already minted all of your allocated NFTs!",
+                        totalToken: totalToken,
                     })
                 } else {
                     res.json({
                         success: true,
-                        count: parseInt(process.env.PUBLICSALE_MAX_MINT) - curColTokens.length
+                        count: parseInt(process.env.PUBLICSALE_MAX_MINT) - curColTokens.length,
+                        totalToken: totalToken,
                     });
                 }
             } catch {
                 res.json({
                     success: false,
                     message: "Sorry, please try again later.",
+                    totalToken: totalToken,
                 })
             }
         }
